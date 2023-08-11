@@ -1,11 +1,11 @@
 {
   description = "CLI for searching packages on search.nixos.org";
   inputs = {
-    nixpkgs.url = github:nixos/nixpkgs/nixos-unstable;
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    flake-utils.url = github:numtide/flake-utils;
+    flake-utils.url = "github:numtide/flake-utils";
 
-    flake-compat.url = github:edolstra/flake-compat;
+    flake-compat.url = "github:edolstra/flake-compat";
     flake-compat.flake = false;
 
     gomod2nix.url = "github:nix-community/gomod2nix";
@@ -23,7 +23,7 @@
           pkgs = import inputs.nixpkgs {
             inherit system overlays;
           };
-          warnToUpgrade = pkgs.lib.warn "Please upgrade Nix to 2.7 or later.";
+          # warnToUpgrade = pkgs.lib.warn "Please upgrade Nix to 2.7 or later.";
         in
         rec {
           packages = rec {
@@ -35,7 +35,7 @@
             };
             default = nix-search;
           };
-          defaultPackage = warnToUpgrade packages.default; # for compat with pre-2.7 flakes
+          # defaultPackage = warnToUpgrade packages.default; # for compat with pre-2.7 flakes
 
           apps = rec {
             nix-search = {
@@ -44,7 +44,7 @@
             };
             default = nix-search;
           };
-          defaultApp = warnToUpgrade apps.default; # for compat with pre-2.7 flakes
+          # defaultApp = warnToUpgrade apps.default; # for compat with pre-2.7 flakes
 
           devShells = rec {
             default = pkgs.mkShell {
@@ -98,7 +98,7 @@
               hardeningDisable = [ "fortify" ];
             };
           };
-          devShell = warnToUpgrade devShells.default; # for compat with pre-2.7 flakes
+          # devShell = warnToUpgrade devShells.default; # for compat with pre-2.7 flakes
         }
       );
 }
